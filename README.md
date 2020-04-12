@@ -8,7 +8,7 @@ An exercise for some Docker practice and boilerplating a tModLoader server for T
 
 # Starting the server
 ```
-git clone git@github.com:aykhaiweng/Terraria-tModLoader.git
+echo 'sudo docker run --rm -it -p 7777:7777 -v $(pwd)/mnt/share/:/.local/share/ aykhaiweng:terraria-tmodloader --log-opt max-size=200k' > start.sh
 chmod +x start.sh
 ./start.sh
 ```
