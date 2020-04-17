@@ -8,9 +8,12 @@ An exercise for some Docker practice and boilerplating a tModLoader server for T
 
 ### Starting the server
 ```
-echo 'sudo docker run --rm -it -p 7777:7777 -v $(pwd)/mnt/share/:/.local/share/ aykhaiweng:terraria-tmodloader --log-opt max-size=200k' > start.sh
-chmod +x start.sh
-./start.sh
+docker run --rm -it -p 7777:7777 -v $(pwd)/mnt/share/:/.local/share/ aykhaiweng:terraria-tmodloader --log-opt max-size=200k
+```
+
+### Updating mods
+```
+docker run --rm -it -p 7777:7777 --entrypoint="update_mods" -v $(pwd)/mnt/share/:/.local/share/ aykhaiweng:terraria-tmodloader
 ```
 
 ### Links

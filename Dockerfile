@@ -1,5 +1,8 @@
 FROM clearlinux:latest
 
+############################################################
+# INITIALIZATION
+############################################################
 # Adding meta
 LABEL	maintainer="Au Yeong Khai Weng <aykhaiweng@gmail.com>" \
 		description="Terraria + tModLoader v0.11.6.2" \
@@ -10,7 +13,7 @@ ENV TERRARIA_SERVER_VERSION "1353"
 ENV TMODLOADER_VERSION "0.11.6.2"
 
 # Update and install tools
-RUN swupd bundle-add unzip wget
+RUN swupd bundle-add unzip wget python3-basic
 
 # Make the opt directory if it doesn't exist
 RUN mkdir -p /opt
@@ -34,6 +37,17 @@ RUN tar -xf /tmp/tmodloader.tar.gz -C /opt/terraria-server
 RUN chmod u+x /opt/terraria-server/tModLoaderServer*
 RUN chmod u+x /opt/terraria-server/TerrariaServer*
 
+
+############################################################
+# ADD SCRIPTS TO BIN
+############################################################
+
+COPY scripts/update_mods.py /bin/update_mods
+
+
+############################################################
+# DOCKER NETWORK AND RUN CONFIGS
+############################################################
 # Exposing the port that Terraria runs on by default
 EXPOSE 7777
 
