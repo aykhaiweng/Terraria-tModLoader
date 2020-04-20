@@ -31,12 +31,12 @@ And run it:
 
 #### TLDR;
 ```
-docker run --rm -it -p 7777:7777 -v $(pwd)/mnt/share/:/.local/share/ aykhaiweng:terraria-tmodloader --log-opt max-size=200k
+docker run --rm -it -p 7777:7777 -v $(pwd)/mnt/share/:/.local/share/ aykhaiweng/terraria-tmodloader --log-opt max-size=200k
 ```
 
 ### Updating mods
 ```
-docker run --rm -it -p 7777:7777 --entrypoint="update_mods" -v $(pwd)/mnt/share/:/.local/share/ aykhaiweng:terraria-tmodloader
+docker run --rm -it --entrypoint="update_mods" -v $(pwd)/mnt/share/:/.local/share/ aykhaiweng/terraria-tmodloader
 ```
 
 

@@ -5,12 +5,12 @@
                 if you decided to change where the mods were stored.
 @AUTHOR:        Au Yeong Khai Weng <aykhaiweng@gmail.com>
 """
-import os
+import os, glob
 from threading import Thread
 
 DOWNLOAD_URL = "http://javid.ddns.net/tModLoader/download.php?Down=mods/{mod_name}"
 MOD_FOLDER = "/.local/share/Terraria/ModLoader/Mods"
-WGET_COMMAND = "wget '{url}' -O '{target}'"
+WGET_COMMAND = "wget '{url}' -O '{target}' -nv"
 
 def download_mod(mod_name, download_url=DOWNLOAD_URL, mod_folder=MOD_FOLDER):
     """
@@ -21,8 +21,18 @@ def download_mod(mod_name, download_url=DOWNLOAD_URL, mod_folder=MOD_FOLDER):
 
 def main(mod_folder=MOD_FOLDER):
     threads = []
-    mods = os.listdir(mod_folder)
-    print("Updating the following mods: ")
+
+    # Controller for searching for mod files in a predefined
+    # mod folder
+    search_path = mod_folder
+    glob_regex = mod_folder + "/*.tmod"
+    mods = glob.glob(glob_regex)
+
+    # Clean the directory names
+    for i, _m in enumerate(mods.copy()):
+        mods[i] = _m.split('/')[-1]
+
+    print(f"Updating the following mods ({glob_regex}): ")
     for _m in mods:
         print(f"\t{_m}")
     confirm = input("Confirm (y/n)? ")
